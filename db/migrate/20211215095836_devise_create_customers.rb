@@ -38,7 +38,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       t.string :first_name_kana,   null: false, default: ""
       t.string :postal_code,       null: false, default: ""
       t.string :address,           null: false, default: ""
-      t.string :telephone_numder,  null: false, default: ""
+      t.string :telephone_number,  null: false, default: ""
       #　会員ステータス　true=契約中　 false=解約
       t.boolean :is_active,         default: true, null: false
       

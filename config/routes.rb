@@ -6,11 +6,7 @@ Rails.application.routes.draw do
     registrations: 'customers/registrations'
   }
 
-  devise_for :admin, controllers: {
-    sessions: 'admin/sessions',
-    passwords: 'admin/passwords',
-    registrations: 'admin/registrations'
-  }
+  devise_for :admin
 
   #adminの管理
   namespace :admin do
@@ -26,7 +22,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     # customersコントローラー
     # withdrawalアクションがまだ
-    get '/customers/withdrawal' => 'customers#withdrawal'
+    get '/customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal_customer'
     resources :customers, only: [:show, :edit, :update]
   end
 

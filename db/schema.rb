@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_095836) do
     t.string "first_name_kana", default: "", null: false
     t.string "postal_code", default: "", null: false
     t.string "address", default: "", null: false
-    t.string "telephone_numder", default: "", null: false
+    t.string "telephone_number", default: "", null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_095836) do
     t.string "image_id"
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true, null: false
     t.integer "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -10,18 +10,17 @@
   </head>
 
   <body>
-    <% if admin_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_admin_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_admin_session_path %>
-      </li>
-    <% end %>
-    <%= yield %>
+    <!--urlにadminがあるなしでhedder分岐-->
+    <header class="header">
+      <% if request.fullpath.include? "admin"  %>
+        <%= render 'layouts/admin_header' %>
+      <% else%>
+        <%= render 'layouts/customers_header' %>
+      <% end %>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
