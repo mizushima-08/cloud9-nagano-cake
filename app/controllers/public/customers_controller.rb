@@ -9,9 +9,9 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    @customer = Customers.find(params[:id])
+    @customer = current_customer
     @customer.update(customer_params)
-    redirect_to  customer.current_customer_path
+    redirect_to  customer_path(current_customer)
   end
 
   def withdrawal
