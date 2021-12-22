@@ -1,25 +1,17 @@
-class Public::CustomersController < ApplicationController
-
+class Admin::CustomersController < ApplicationController
+  def index
+    @customers = Customer.all
+  end
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
   end
-
   def edit
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
   end
-
   def update
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
     @customer.update(customer_params)
-    redirect_to  customer_path(current_customer)
-  end
-
-  def withdrawal
-    @customer = current_customer
-  end
-
-  def switch
-
+    redirect_to  admin_customers_path
   end
 
   private
@@ -27,5 +19,4 @@ class Public::CustomersController < ApplicationController
     params.require(:customer).permit(:is_active, :last_name, :first_name, :last_name_kana,
     :first_name_kana, :telephone_number, :email, :password, :postal_code, :address)
   end
-
 end
