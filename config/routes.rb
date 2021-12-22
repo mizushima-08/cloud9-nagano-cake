@@ -21,11 +21,12 @@ Rails.application.routes.draw do
     root 'homes#top'
     get '/about' => 'homes#about'
     resources :items, only: [:index, :show]
-    # customersコントローラー
-    # withdrawalアクションがまだ
-    get '/customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal_customer'
+    # customersコントローラー withdrawalアクションがまだ
+    get '/customer/withdrawal' => 'customers#withdrawal', as: 'withdrawal_customer'
     resource :customer, only: [:show, :edit, :update]
     resources :addresses, except: [:show, :new ]
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete '/cart_items' => 'cart_items#destroy_all'
   end
 
 end

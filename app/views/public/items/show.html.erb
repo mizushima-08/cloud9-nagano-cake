@@ -16,7 +16,12 @@
           ¥<%= (@item.price * 1.1).floor %>(税込)
         </td>
       </tr>
-  <!--ここに個数とカートへの移動をかく-->
+      <%= form_with model: @cart_item, local:true do |f| %>
+        <%= f.number_field :amount, min:1, placeholder: "個数選択" %>
+        <!--hidden_fieldでitem_idを一緒に登録する-->
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
+      <% end %>
     </tbody>
   </table>
 </div>
