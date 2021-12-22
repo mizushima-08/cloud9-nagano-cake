@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     root 'homes#top'
     resources :genres, except: [:new, :show, :destroy]
     resources :items, except: [:destroy]
+    resources :customers, except: [:new, :create, :destroy]
   end
 
   #publicの管理
