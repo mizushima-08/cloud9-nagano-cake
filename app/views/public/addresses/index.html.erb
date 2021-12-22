@@ -7,7 +7,7 @@
     </div>
     <div>
       住所
-      <%= f.text_field :address,  placeholder: "0000000" %>
+      <%= f.text_field :address,  placeholder: "東京都足立区" %>
     </div>
     <div>
       宛名
@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= @addresses.each do |address| %>
+      <% @addresses.each do |address| %>
         <tr>
           <td><%= address.postal_code %></td>
           <td><%= address.address %></td>
