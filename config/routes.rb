@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     # customersコントローラー
     # withdrawalアクションがまだ
     get '/customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal_customer'
-    resources :customers, only: [:show, :edit, :update]
+    resource :customer, only: [:show, :edit, :update]
     resources :addresses, except: [:show, :new ]
   end
 

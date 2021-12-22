@@ -1,8 +1,8 @@
 class Public::AddressesController < ApplicationController
   def index
     @address_new = Address.new
-    # ログインユーザーのみの表示
-    @addresses = Address.all
+    # ログインユーザーのaddressのみ表示
+    @addresses = current_customer.addresses
   end
 
   def create
@@ -26,11 +26,11 @@ class Public::AddressesController < ApplicationController
   def destroy
     @address = Address.find(params[:id])
     @address.destroy
-    redirect_to address_path
+    redirect_to addresses_path
   end
 
   private
-  def ship_address_params
+  def address_params
     params.require(:address).permit(:name, :postal_code, :address)
   end
 end

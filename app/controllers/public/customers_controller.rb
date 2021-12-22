@@ -19,12 +19,13 @@ class Public::CustomersController < ApplicationController
   end
 
   def switch
+    
   end
 
   private
   def customer_params
-  	  params.require(:customer).permit(:is_active, :last_name, :first_name, :last_name_kana, :first_name_kana,
-  	                                   :telephone_number, :email, :password, :postal_code, :address)
+    params.require(:customer).permit(:is_active, :last_name, :first_name, :last_name_kana, 
+    :first_name_kana, :telephone_number, :email, :password, :postal_code, :address)
   end
 
 end

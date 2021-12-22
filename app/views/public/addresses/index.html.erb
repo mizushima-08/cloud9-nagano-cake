@@ -1,6 +1,6 @@
 <h2>配送先登録/一覧</h2>
 <div>
-  <%= form_for(@address_new) do |f| %>
+  <%= form_with model: @address_new, local:true do |f| %>
     <div>
       郵便番号（ハイフンなし）
       <%= f.text_field :postal_code, placeholder: "0000000" %>
@@ -34,7 +34,7 @@
           <td><%= address.address %></td>
           <td><%= address.name %></td>
           <td><%= link_to "編集する", edit_address_path(address) %></td>
-          <td><%= link_to "削除する", method: :delete ,data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to "削除する", address_path(address), method: :delete ,data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
