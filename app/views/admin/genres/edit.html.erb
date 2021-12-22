@@ -1,4 +1,4 @@
-<%= form_for(@genre, url: admin_genres_path) do |f| %>
+<%= form_with model: [:admin, @genre], local:true do |f| %>
   <h2>ジャンル編集</h2>
   <p>ジャンル名</p>
   <%= f.text_field :name %>
