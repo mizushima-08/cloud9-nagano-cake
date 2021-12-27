@@ -1,8 +1,6 @@
 class Public::CartItemsController < ApplicationController
   def index
     @cart_items = CartItem.all
-    # private下で計算
-    @total_price = total(current_customer)
   end
 
   def update
@@ -25,20 +23,25 @@ class Public::CartItemsController < ApplicationController
   def create
     @cart_item_new = CartItem.new(cart_item_params)
     @cart_item_new.customer_id = current_customer.id
-    @cart_item_new.save
-    redirect_to cart_items_path
+    # whereでログインユーザーのレコードを取り出す
+    @current_user = CartItem.where(customer_id: current_customer)
+    if  @current_user.find_by(item_id: @cart_item_new.item_id)
+      # inside_cart_itemはカートの中の同じitem.idの列
+      @inside_cart_item = @current_user.find_by(item_id: @cart_item_new.item_id)
+      @inside_cart_item.amount += params[:cart_item][:amount].to_i
+      @inside_cart_item.save
+      redirect_to cart_items_path
+
+    else
+      @cart_item_new.save(amount: params[:cart_item][:amount].to_i)
+      redirect_to cart_items_path
+    end
   end
+
+
 
   private
   def cart_item_params
-    params.require(:cart_item).permit(:customer_id, :item_id, :amount)
-  end
-
-  def total(price)
-    total_price = 0
-    price.cart_items.each do |cart_item|
-      total_price += cart_item.amount * cart_item.item.price
-    end
-    return (total_price * 1.1).floor
+    params.require(:cart_item).permit(:item_id, :amount)
   end
 end
