@@ -1,4 +1,5 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin!
   def index
     if params[:id] # 会員詳細から来た場合
       @orders = Customer.find(params[:id]).orders.all
