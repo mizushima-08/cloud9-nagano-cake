@@ -1,7 +1,7 @@
 class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @customers = Customer.all
+    @customers = Customer.page(params[:page]).per(10)
   end
   def show
     @customer = Customer.find(params[:id])
@@ -11,8 +11,12 @@ class Admin::CustomersController < ApplicationController
   end
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to  admin_customers_path
+    if @customer.update(customer_params)
+      redirect_to  admin_customers_path
+    else
+      flash[:customer_updated_error] = "会員情報が正常に保存されませんでした。"
+      redirect_to  edit_admin_customer_path
+    end
   end
 
   private
