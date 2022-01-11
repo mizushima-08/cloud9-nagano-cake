@@ -7,8 +7,12 @@ class Admin::GenresController < ApplicationController
 
   def create
     @genre = Genre.new(genre_params)
-    @genre.save
-    redirect_to admin_genres_path
+    if @genre.save
+      redirect_to admin_genres_path
+    else
+      flash[:genre_created_error] = "ジャンル情報が正常に保存されませんでした。"
+      redirect_to admin_genres_path
+    end
   end
 
   def edit
@@ -18,8 +22,12 @@ class Admin::GenresController < ApplicationController
 #ここがうまくいかない
   def update
     @genre = Genre.find(params[:id])
-    @genre.update(genre_params)
-    redirect_to  admin_genres_path
+    if @genre.update(genre_params)
+      redirect_to  admin_genres_path
+    else
+      flash[:genre_updated_error] = "商品情報が正常に保存されませんでした。"
+      redirect_to  edit_admin_genre_path(@genre)
+    end
   end
 
   private

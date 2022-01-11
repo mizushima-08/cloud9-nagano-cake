@@ -1,6 +1,19 @@
-<%= form_with model: [:admin, @genre], local:true do |f| %>
-  <h2>ジャンル編集</h2>
-  <p>ジャンル名</p>
-  <%= f.text_field :name %>
-  <%= f.submit "変更を保存" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <h4>ジャンル編集</h4>
+  </div>
+  <div class="row d-flex">
+    <% if flash[:genre_updated_error] %>
+      <span class="text-danger"><%= flash[:genre_updated_error] %></span>
+    <% end %>
+  </div>
+  <div class="row mt-4">
+    <div class="col-sm-6">
+      <%= form_with model: [:admin, @genre], local:true do |f| %>
+        ジャンル名
+        <%= f.text_field :name, class: "offset-sm-1" %>
+        <%= f.submit "変更を保存", class: "btn btn-success font-weight-bold col-sm-3 offset-sm-1" %>
+      <% end %>
+    </div>
+  </div>
+</div>
