@@ -2,9 +2,9 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
   def index
     if params[:id] # 会員詳細から来た場合
-      @orders = Customer.find(params[:id]).orders.all
+      @orders = Customer.find(params[:id]).orders.page(params[:page]).per(10)
     else
-      @orders = Order.all
+      @orders = Order.page(params[:page]).per(10)
     end
   end
 

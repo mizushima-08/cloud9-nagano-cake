@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   #adminの管理
   namespace :admin do
-    root 'homes#top'
+    # url"/"を注文履歴に
+    root 'orders#index'
     resources :genres, except: [:new, :show, :destroy]
     resources :items, except: [:destroy]
     resources :customers, except: [:new, :create, :destroy]
@@ -34,7 +35,6 @@ Rails.application.routes.draw do
     resources :orders, except: [:update, :edit]
     get '/order/thanks' => 'orders#thanks'
     post 'order/confirm' => 'orders#confirm'
-
   end
 
 end

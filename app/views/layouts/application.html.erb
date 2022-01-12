@@ -12,7 +12,7 @@
   <body>
     <!--urlにadminがあるなしでhedder分岐-->
     <header class="header">
-      <% if request.fullpath.include? "admin"  %>
+      <% if admin_signed_in? %>
         <%= render 'layouts/admin_header' %>
       <% else%>
         <%= render 'layouts/customers_header' %>
