@@ -1,27 +1,52 @@
-<div>
-  <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
-</div>
-
-<div>
-  <table>
-    <tbody>
-      <tr>
-        <td><strong><%= @item.name %></strong></td>
-      </tr>
-      <tr>
-        <td><%= @item.introduction %></td>
-      </tr>
-      <tr>
-        <td>
-          ¥<%= (@item.price * 1.1).floor %>(税込)
-        </td>
-      </tr>
-      <%= form_with model: @cart_item, local:true do |f| %>
-        <%= f.number_field :amount, min:1 , placeholder: "個数選択" %>
-        <!--hidden_fieldでitem_idを一緒に登録する-->
-        <%= f.hidden_field :item_id, value: @item.id  %>
-        <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-2 border">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |f| %>
+            <tr>
+              <td>
+                <%= f.name %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+    <div class="col-sm-3">
+      <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
+    </div>
+    <div class="col-sm-7">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td><strong><%= @item.name %></strong></td>
+          </tr>
+          <tr>
+            <td><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>¥<%= (@item.price * 1.1).floor %>(税込)</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= form_with model: @cart_item, local:true do |f| %>
+                <%= f.number_field :amount, min:1 , placeholder: "個数選択" %>
+                <!--hidden_fieldでitem_idを一緒に登録する-->
+                <%= f.hidden_field :item_id, value: @item.id  %>
+                <%= f.submit "カートに入れる", class: "btn btn-success ml-4" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

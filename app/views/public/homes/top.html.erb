@@ -1,4 +1,49 @@
-<p>ようこそ、ながのCAKEへ!</p>
-<p>このサイトは、ケーキ販売のECサイトになります。</p>
-<p>会員でない方も商品の閲覧はできますが、</p>
-<p>購入には会員登録が必要になります。</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-2 border">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |f| %>
+            <tr>
+              <td>
+                <%= f.name %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-10 d-flex align-items-center justify-content-center">
+      <p>ようこそ、ながのCAKEへ!</br>
+      このサイトは、ケーキ販売のECサイトになります。</br>
+      会員でない方も商品の閲覧はできますが、</br>
+      購入には会員登録が必要になります。</p>
+    </div>
+  </div>
+  <div class="row mt-4 offset-sm-2">
+    <h2>新着商品</h2>
+  </div>
+  <div class="row mt-4 offset-sm-2">
+    <% @items.last(4).each do |item| %>
+      <div class="mx-auto">
+        <%= link_to item_path(item) do %>
+          <%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg', fallback: 'noimage.jpg', size: '200x200', class: "rounded" %><br>
+        <% end %>
+        <div class="row mt-3">
+          <span class="red-border px-3"><%= item.name %></span>
+        </div>
+        <div class="row mt-1">
+          <span class="red-border px-3">￥<%= (item.price * 1.1).floor %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="text-right">
+    <%= link_to "すべての商品を見る >", items_path %>
+  </div>
+</div>
