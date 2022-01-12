@@ -10,10 +10,15 @@ Rails.application.routes.draw do
 
   #adminの管理
   namespace :admin do
-    root 'homes#top'
+    # url"/"を注文履歴に
+    root 'orders#index'
     resources :genres, except: [:new, :show, :destroy]
     resources :items, except: [:destroy]
     resources :customers, except: [:new, :create, :destroy]
+    resources :orders, only: [:show, :index]
+    get '/customer/:id/orders' => 'orders#index', as: "customer_data_orders" # 会員詳細 => 注文履歴の表示データを変える用
+    patch "orders/order_status" => "orders#order_status_update"
+    patch "orders/item_status" => "orders#item_status_update"
   end
 
   #publicの管理
@@ -30,7 +35,6 @@ Rails.application.routes.draw do
     resources :orders, except: [:update, :edit]
     get '/order/thanks' => 'orders#thanks'
     post 'order/confirm' => 'orders#confirm'
-
   end
 
 end

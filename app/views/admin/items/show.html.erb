@@ -1,41 +1,59 @@
-<h2>商品詳細</h2>
-<div>
-  <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
-</div>
+<div class="container mt-4">
+  <div class="row">
+    <h4 class="ml-5">商品詳細</h4>
+  </div>
 
-<div>
-  <table>
-    <tbody>
-      <tr>
-        <td>商品名</td>
-        <td><%= @item.name %></td>
-      </tr>
+  <div class="row mt-5">
+    <div class="col-sm-3">
+      <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '220x200' %>
+    </div>
 
-      <tr>
-        <td>商品説明</td>
-        <td><%= @item.introduction %></td>
-      </tr>
+    <div class="col-sm-7">
+      <table>
+        <tbody>
+          <tr>
+            <td class="col-sm-3"><p>商品名</p></td>
+            <td class="col-sm-8"><p><%= @item.name %></p></td>
+          </tr>
 
-      <tr>
-        <td>ジャンル</td>
-        <td><%= @item.genre.name %></td>
-      </tr>
+          <tr>
+            <td class="col-sm-3"><p>商品説明</p></td>
+            <td class="col-sm-8"><p><%= @item.introduction %></p></td>
+          </tr>
 
-      <tr>
-        <td>税込価格(税抜価格)</td>
-        <td>
-          <%= (@item.price * 1.1).floor %>(<%= @item.price %>)円
-        </td>
-      </tr>
+          <tr>
+            <td class="col-sm-3"><p>ジャンル</p></td>
+            <td class="col-sm-8"><p><%= @item.genre.name %></p></td>
+          </tr>
 
-      <tr>
-        <td>販売ステータス</td>
-        <td><%= @item.is_active %></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+          <tr>
+            <td class="col-sm-3"><p>税込価格(税抜価格)</p></td>
+            <td class="col-sm-8">
+              <p><%= (@item.price * 1.1).floor %>(<%= @item.price %>)円</p>
+            </td>
+          </tr>
 
-<div>
-  <%= link_to "編集する", edit_admin_item_path(@item) %>
+          <tr>
+            <td class="col-sm-3"><p>販売ステータス</p></td>
+            <td class="col-sm-8">
+              <p>
+                <% if @item.is_active == true %>
+                  <span class="text-success font-weight-bold">販売中</span>
+                <% else %>
+                  <span class="font-weight-bold">販売停止中</span>
+                <% end %>
+              </p>
+            </td>
+          </tr>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row mt-3">
+        <div class="mx-auto col-sm-3">
+          <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success btn-md btn-block font-weight-bold" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
