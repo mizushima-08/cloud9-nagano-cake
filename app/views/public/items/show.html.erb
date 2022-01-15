@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="row">
-    <div class="col-sm-2 border genre-search">
+    <div class="col-sm-2 border">
       <%= render 'public/genre', genres: @genres %>
     </div>
     <div class="col-sm-3">
@@ -26,7 +26,11 @@
                 <%= f.number_field :amount, min:1 , placeholder: "個数選択" %>
                 <!--hidden_fieldでitem_idを一緒に登録する-->
                 <%= f.hidden_field :item_id, value: @item.id  %>
-                <%= f.submit "カートに入れる", class: "btn btn-success ml-4" %>
+                <% if @item.is_active == true %>
+                  <%= f.submit "カートに入れる", class: "btn btn-success ml-4" %>
+                <% else %>
+                  <span class="btn btn-danger ml-4">売り切れ</span>
+                <% end %>
               <% end %>
             </td>
           </tr>

@@ -17,7 +17,11 @@
   		          <%= attachment_image_tag item, :image, size: "200x200", format: 'jpeg' %>
   		        <% end %></br>
               <span><%= item.name %></span></br>
-              <span>¥<%= item.price %></span>
+              <% if item.is_active == true %>
+                <span>¥<%= item.price %></span>
+              <% else %>
+                <strong class="text-danger">売り切れ</strong>
+              <% end %>
            </div>
         <% end %>
       </div>
