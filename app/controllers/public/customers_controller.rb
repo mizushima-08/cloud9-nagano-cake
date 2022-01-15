@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-
+  before_action :authenticate_customer!
   def show
     @customer = current_customer
   end
@@ -19,6 +19,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def switch
+    @customer = current_customer
+    if @customer.update(is_active: false)
+      sign_out current_customer #URLを踏ませずにコントローラーから直接サインアウトの指示を出す（device公式)
+    end
+    redirect_to root_path
 
   end
 
