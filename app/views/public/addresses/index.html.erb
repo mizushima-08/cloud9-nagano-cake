@@ -1,42 +1,49 @@
-<h2>配送先登録/一覧</h2>
-<div>
-  <%= form_with model: @address_new, local:true do |f| %>
-    <div>
-      郵便番号（ハイフンなし）
-      <%= f.text_field :postal_code, placeholder: "0000000" %>
+<div class="container mt-4">
+  <div class="row">
+    <h4>配送先登録/一覧</h4>
+  </div>
+  <div>
+    <%= form_with model: @address_new, local:true do |f| %>
+      <div class="row">
+        <label class="col-sm-3">郵便番号(ハイフンなし)</label>
+        <%= f.text_field :postal_code, autofocus: true, class:"col-sm-3 radio-new"%>
+      </div>
+      <div class="row">
+        <label class="col-sm-3">住所</label>
+        <%= f.text_field :address, autofocus: true, class:"col-sm-6 radio-new"%>
+      </div>
+      <div class="row">
+        <label class="col-sm-3">宛名</label>
+        <%= f.text_field :name, autofocus: true, class:"col-sm-3 radio-new" %>
+        <%= f.submit "新規登録",class:"btn btn-success offset-sm-3" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row mt-5">
+    <div class="col-sm-9">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>郵便番号</td>
+            <td>住所</td>
+            <td>宛名</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @addresses.each do |address| %>
+            <tr>
+              <td class="col-sm-1 align-middle"><%= address.postal_code %></td>
+              <td class="col-sm-2 align-middle"><%= address.address %></td>
+              <td class="col-sm-1 align-middle"><%= address.name %></td>
+              <td class="col-sm-2 text-center">
+                <%= link_to "編集する", edit_address_path(address), class:"btn btn-success" %>
+                <%= link_to "削除する", address_path(address), method: :delete ,data: { confirm: 'Are you sure?' }, class:"btn btn-danger ml-2" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-    <div>
-      住所
-      <%= f.text_field :address,  placeholder: "東京都足立区" %>
-    </div>
-    <div>
-      宛名
-      <%= f.text_field :name, placeholder: "令和道子" %>
-      <%= f.submit "新規登録" %>
-    </div>
-  <% end %>
-</div>
-
-<div>
-  <table>
-    <thead>
-      <tr>
-        <td>郵便番号</td>
-        <td>住所</td>
-        <td>宛名</td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @addresses.each do |address| %>
-        <tr>
-          <td><%= address.postal_code %></td>
-          <td><%= address.address %></td>
-          <td><%= address.name %></td>
-          <td><%= link_to "編集する", edit_address_path(address) %></td>
-          <td><%= link_to "削除する", address_path(address), method: :delete ,data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  </div>
 </div>

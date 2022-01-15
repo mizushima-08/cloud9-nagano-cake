@@ -1,37 +1,41 @@
-<h2>注文履歴一覧</h2>
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>注文日</th>
-        <th>配送先</th>
-        <th>注文商品</th>
-        <th>支払金額</th>
-        <th>ステータス</th>
-        <th>注文詳細</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
+<div class="container mt-4">
+  <div class="row">
+    <h4>注文履歴一覧</h4>
+  </div>
+  <div class="row mt-4">
+    <table class="table table-bordered">
+      <thead>
         <tr>
-          <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-          <td>
-            <%= order.postal_code %></br>
-            <%= order.address %></br>
-            <%= order.name %>
-          </td>
-          <td>
-            <% order.product_orders.all.each do |p| %>
-              <%= p.item.name %></br>
-            <% end %>
-          </td>
-          <td><%= order.total_price %></td>
-          <td><%= order.order_status_i18n %></td>
-          <td><%= link_to "表示する", order_path(order) %></td>
-          <td><%= link_to "削除", order_path(order), method: :delete ,data: { confirm: 'Are you sure?' } %></td>
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td class="align-middle"><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td class="align-middle">
+              <%= order.postal_code %></br>
+              <%= order.address %></br>
+              <%= order.name %>
+            </td>
+            <td class="align-middle">
+              <% order.product_orders.all.each do |p| %>
+                <%= p.item.name %></br>
+              <% end %>
+            </td>
+            <td class="align-middle"><%= order.total_price %></td>
+            <td class="align-middle"><%= order.order_status_i18n %></td>
+            <td class="align-middle text-center"><%= link_to "表示する", order_path(order), class:"btn btn-primary" %></td>
+            <td><%= link_to "削除", order_path(order), method: :delete ,data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

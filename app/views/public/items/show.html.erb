@@ -1,23 +1,8 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-2 border">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @genres.each do |f| %>
-            <tr>
-              <td>
-                <%= f.name %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-  </div>
+      <%= render 'public/genre', genres: @genres %>
+    </div>
     <div class="col-sm-3">
       <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
     </div>

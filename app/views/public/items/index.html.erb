@@ -1,22 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-2 border">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @genres.each do |f| %>
-            <tr>
-              <td>
-                <%= f.name %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'public/genre', genres: @genres %>
     </div>
     <div class="col-sm-10">
       <div class="row offset-sm-1">

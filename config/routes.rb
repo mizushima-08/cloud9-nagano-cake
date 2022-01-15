@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :orders, except: [:update, :edit]
     get '/order/thanks' => 'orders#thanks'
     post 'order/confirm' => 'orders#confirm'
+    get 'order/confirm' => 'orders#confirm'
   end
 
 end
