@@ -5,45 +5,45 @@
   <div class="row">
     <div class="col-sm-8">
       <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th class="col-sm-4">商品名</th>
-          <th class="col-sm-1">単価(税込)</th>
-          <th class="col-sm-1">数量</th>
-          <th class="col-sm-1">小計</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% total = 0 %>
-        <% @cart_items.each do |cart_item| %>
+        <thead class="thead-light">
           <tr>
-            <td>
-              <%= attachment_image_tag cart_item.item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '50x50' %>
-              <%= cart_item.item.name %>
-            </td>
-            <td class="align-middle"><%= (cart_item.item.with_tax_price).floor %></td>
-            <td class="align-middle"><%= cart_item.amount %></td>
-            <td class="align-middle"><%= (cart_item.subtotal).floor %></td>
+            <th class="col-sm-4">商品名</th>
+            <th class="col-sm-1">単価(税込)</th>
+            <th class="col-sm-1">数量</th>
+            <th class="col-sm-1">小計</th>
           </tr>
-          <% total += cart_item.subtotal %>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% total = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <%= attachment_image_tag cart_item.item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '50x50' %>
+                <%= cart_item.item.name %>
+              </td>
+              <td class="align-middle"><%= (cart_item.item.with_tax_price).floor %></td>
+              <td class="align-middle"><%= cart_item.amount %></td>
+              <td class="align-middle"><%= (cart_item.subtotal).floor %></td>
+            </tr>
+            <% total += cart_item.subtotal %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
     <div class="col-sm-3 ml-5">
       <div class="row">
         <table class="table table-bordered">
           <tbody>
             <tr>
-              <td>送料</td>
+              <td class="table-active">送料</td>
               <td><%= @order.postage %></td>
             </tr>
             <tr>
-              <td>商品合計</td>
+              <td class="table-active">商品合計</td>
               <td><%= total %></td>
             </tr>
             <tr>
-              <td>請求金額</td>
+              <td class="table-active">請求金額</td>
               <td><%= @order.postage + total %></td>
             </tr>
           </tbody>

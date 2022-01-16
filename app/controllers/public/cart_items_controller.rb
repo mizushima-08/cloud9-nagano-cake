@@ -32,7 +32,6 @@ class Public::CartItemsController < ApplicationController
       @inside_cart_item.amount += params[:cart_item][:amount].to_i
       @inside_cart_item.save
       redirect_to cart_items_path
-
     else
       @cart_item_new.save(amount: params[:cart_item][:amount].to_i)
       redirect_to cart_items_path
