@@ -18,7 +18,7 @@
   		        <% end %></br>
               <span><%= item.name %></span></br>
               <% if item.is_active == true %>
-                <span>¥<%= item.price %></span>
+                <span>¥<%= item.price.to_s(:delimited) %></span>
               <% else %>
                 <strong class="text-danger">売り切れ</strong>
               <% end %>

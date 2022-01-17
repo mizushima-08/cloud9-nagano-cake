@@ -44,7 +44,8 @@
             </tr>
             <tr>
               <td class="table-active">請求金額</td>
-              <td><%= @order.postage + total %></td>
+              <% total_price = @order.postage + total %>
+              <td><%= total_price %></td>
             </tr>
           </tbody>
         </table>
@@ -63,8 +64,9 @@
   <div class="row mt-2">
     <div class="mx-auto">
       <%= form_with model: @order, local:true do |f| %>
-        <%= f.hidden_field :total_price, value: 400  %>
-        <%= f.submit "注文を確定する",class:"btn btn-success" %>
+        <%= f.hidden_field :postage, value: @order.postage  %>
+        <%= f.hidden_field :total_price, value: total_price  %>
+        <%= f.submit "注文を確定する", class:"btn btn-success" %>
       <% end %>
     </div>
   </div>

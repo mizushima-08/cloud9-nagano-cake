@@ -8,22 +8,25 @@ class Public::OrdersController < ApplicationController
   def confirm
     @cart_items = CartItem.all
     @order = Order.new(order_params)
-    @order.postage = 800
+    @order.postage = 400
     session[:payment_method] = order_params[:payment_method]
-    session[:total_price] = order_params[:total_price]
-    if params[:select_address] == "my_address"
-      session[:postal_code] = current_customer.postal_code
-      session[:address] = current_customer.address
-      session[:name] = current_customer.first_name + current_customer.last_name
-    elsif params[:select_address] == "selected_address"
-      @address = Address.find(params[:order][:address_id])
-      session[:postal_code] = @address.postal_code
-      session[:address] = @address.address
-      session[:name] = @address.name
-    elsif params[:select_address] == "new_address"
-      session[:postal_code] = order_params[:postal_code]
-      session[:address] = order_params[:address]
-      session[:name] = order_params[:name]
+    if order_params[:payment_method].nil? or params[:select_address].nil?
+      redirect_to new_order_path
+    else
+      if params[:select_address] == "my_address"
+        session[:postal_code] = current_customer.postal_code
+        session[:address] = current_customer.address
+        session[:name] = current_customer.first_name + current_customer.last_name
+      elsif params[:select_address] == "selected_address"
+        @address = Address.find(params[:order][:address_id])
+        session[:postal_code] = @address.postal_code
+        session[:address] = @address.address
+        session[:name] = @address.name
+      elsif params[:select_address] == "new_address"
+        session[:postal_code] = order_params[:postal_code]
+        session[:address] = order_params[:address]
+        session[:name] = order_params[:name]
+      end
     end
   end
 
@@ -75,6 +78,6 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :total_price, :postage)
   end
 end

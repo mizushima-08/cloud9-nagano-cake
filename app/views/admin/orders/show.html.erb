@@ -43,9 +43,11 @@
       </table>
     </div>
   </div>
+</div>
+<div class="container">
   <div class="row mt-4">
-    <div>
-      <table class="table table-borderless border-top border-bottom" style="margin: 0;">
+    <div class="col-sm-7">
+      <table class="table table-borderless border-top border-bottom" >
         <thead>
           <tr class="table-head" style="background-color:#F5F5F5;">
             <th>商品名</th>
@@ -59,9 +61,9 @@
           <% @order.product_orders.each do |detail| %>
             <tr>
               <td><%= detail.item.name %></td>
-              <td><%= detail.price %></td>
+              <td><%= detail.price.to_s(:delimited) %></td>
               <td><%= detail.amount %></td>
-              <td><%= detail.amount * detail.price %></td>
+              <td><%= (detail.amount * detail.price).to_s(:delimited) %></td>
               <%= form_with(model: detail, url: admin_orders_item_status_path, method: :patch, local: true) do |f| %>
                 <td>
                   <%= f.select :production_status, ProductOrder.production_statuses.keys.map {|k| [I18n.t("enums.product_order.production_status.#{k}"), k]} %>
@@ -74,20 +76,20 @@
         </tbody>
       </table>
     </div>
-    <div class="col-sm-3 d-flex align-self-end">
+    <div class="col-sm-3 ml-5">
       <table class="table table-borderless", style="margin: 0;">
         <tbody>
           <tr>
             <td class="font-weight-bold">商品合計</td>
-            <td></td>
+            <td><%= @order.total_price - @order.postage %></td>
           </tr>
           <tr>
             <td class="font-weight-bold">送料</td>
-            <td></td>
+            <td><%= @order.postage %></td>
           </tr>
           <tr>
             <td class="font-weight-bold">請求金額合計</td>
-            <td></td>
+            <td><%= @order.total_price %> </td>
           </tr>
         </tbody>
       </table>

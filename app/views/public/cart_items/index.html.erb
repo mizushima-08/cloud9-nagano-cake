@@ -25,7 +25,7 @@
                 <%= attachment_image_tag cart_item.item, :image, size: "50x50", format: 'jpeg' %>
                 <%= cart_item.item.name %>
               </td>
-              <td class="align-middle"><%= (cart_item.item.with_tax_price).floor %></td>
+              <td class="align-middle"><%= (cart_item.item.with_tax_price).floor.to_s(:delimited) %></td>
               <td class="align-middle text-center">
                 <!--update　form_withで囲う-->
                 <%= form_with model: cart_item, local:true do |f| %>
@@ -33,7 +33,7 @@
                   <%= f.submit "変更", class: "btn btn-sm btn-success ml-3" %>
                 <% end %>
               </td>
-              <td class="align-middle"><%= (cart_item.subtotal).floor %></td>
+              <td class="align-middle"><%= (cart_item.subtotal).to_s(:delimited) %></td>
               <td class="align-middle text-center"><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' } %></td>
               <% total += cart_item.subtotal %>
             </tr>
@@ -51,7 +51,7 @@
         <tbody>
           <tr>
             <td class="col-sm-6">合計金額</td>
-            <td class="col-sm-6"><%= total %></td>
+            <td class="col-sm-6"><%= total.to_s(:delimited) %></td>
           </tr>
         </tbody>
       </table>

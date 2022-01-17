@@ -39,11 +39,18 @@
     height: 18em;
  }
 
- .nav-link {
-   border: 1px solid;
-   border-radius: 8px;
-   border-color: black;
-   text-align: center;
-   width: 80%;
-   margin: 0 20px;
+ .nav-item {
+    border: 1px solid;
+    border-radius: 8px;
+    border-color: silver;
+    text-align: center;
+    margin: 0 10px;
+ }
+
+ .logo {
+    border: 1px solid;
+    border-color: black;
+    text-align: center;
+    width: 120%;
+    margin: 0 20px;
  }
