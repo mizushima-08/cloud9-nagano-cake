@@ -16,4 +16,9 @@ class Customer < ApplicationRecord
   validates :first_name_kana, :last_name_kana, presence: true, format: { with: /\A([ァ-ン]|ー)+\z/, message: 'はカタカナで入力して下さい。' }
   # アカウント作成時の郵便番号はハイフンなしの7桁のみ登録可能とするバリデーション
   validates :postal_code, format: { with: /\A\d{7}\z/ }
+
+  # 退会しているとログインできないように
+  def active_for_authentication?
+    super && self.is_active?
+  end
 end

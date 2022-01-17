@@ -1,19 +1,30 @@
-<h2>商品一覧</h2>
-<div>
-  <table>
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td>
-            <%= link_to item_path(item) do %>
-		          <%= attachment_image_tag item, :image, size: "150x150", format: 'jpeg' %>
-		        <% end %>
-          </td>
-          <td><%= item.name %></td>
-          <td>¥<%= item.price %></td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-2 border genre-search">
+      <%= render 'public/genre', genres: @genres %>
+    </div>
+    <div class="col-sm-10">
+      <div class="row offset-sm-1">
+        <h3>商品一覧</h3>
+        <span style="padding-top: 7px;">
+          (全<%= Item.where(is_active: true).count %>件)
+        </span>
+      </div>
+      <div class="row ml-5">
+        <% @items.each do |item| %>
+           <div class="col-sm-3 mt-3">
+              <%= link_to item_path(item) do %>
+  		          <%= attachment_image_tag item, :image, size: "200x200", format: 'jpeg' %>
+  		        <% end %></br>
+              <span><%= item.name %></span></br>
+              <% if item.is_active == true %>
+                <span>¥<%= item.price.to_s(:delimited) %></span>
+              <% else %>
+                <strong class="text-danger">売り切れ</strong>
+              <% end %>
+           </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

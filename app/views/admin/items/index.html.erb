@@ -7,7 +7,7 @@
   </div>
   <div class="row mt-4">
     <table class="table table-hover text-center">
-      <thread>
+      <thead class="thead-light">
         <tr>
           <th>商品ID</th>
           <th>商品名</th>
@@ -22,7 +22,7 @@
           <tr>
             <td><%= item.id %></td>
             <td><%= link_to item.name, admin_item_path(item) %></td>
-            <td><%= item.price %></td>
+            <td><%= item.price.to_s(:delimited) %></td>
             <td><%= item.genre.name %></td>
             <td>
               <% if item.is_active == true %>

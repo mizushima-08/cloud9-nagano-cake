@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     # customersコントローラー withdrawalアクションがまだ
     get '/customer/withdrawal' => 'customers#withdrawal', as: 'withdrawal_customer'
+    patch '/customer/switch' => 'customers#switch', as: 'withdrow_switch_customer'
     resource :customer, only: [:show, :edit, :update]
     resources :addresses, except: [:show, :new ]
     resources :cart_items, only: [:index, :update, :destroy, :create]

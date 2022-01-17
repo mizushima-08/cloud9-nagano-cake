@@ -1,27 +1,41 @@
-<div>
-  <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
-</div>
-
-<div>
-  <table>
-    <tbody>
-      <tr>
-        <td><strong><%= @item.name %></strong></td>
-      </tr>
-      <tr>
-        <td><%= @item.introduction %></td>
-      </tr>
-      <tr>
-        <td>
-          ¥<%= (@item.price * 1.1).floor %>(税込)
-        </td>
-      </tr>
-      <%= form_with model: @cart_item, local:true do |f| %>
-        <%= f.number_field :amount, min:1 , placeholder: "個数選択" %>
-        <!--hidden_fieldでitem_idを一緒に登録する-->
-        <%= f.hidden_field :item_id, value: @item.id  %>
-        <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-2 border">
+      <%= render 'public/genre', genres: @genres %>
+    </div>
+    <div class="col-sm-3">
+      <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
+    </div>
+    <div class="col-sm-7">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td><strong><%= @item.name %></strong></td>
+          </tr>
+          <tr>
+            <td><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>¥<%= (@item.price * 1.1).floor.to_s(:delimited) %>(税込)</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= form_with model: @cart_item, local:true do |f| %>
+                <%= f.number_field :amount, min:1, placeholder: "個数選択" %>
+                <!--hidden_fieldでitem_idを一緒に登録する-->
+                <%= f.hidden_field :item_id, value: @item.id  %>
+                <% if @item.is_active == true %>
+                  <%= f.submit "カートに入れる", class: "btn btn-success ml-4" %>
+                <% else %>
+                  <span class="btn btn-danger ml-4">売り切れ</span>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

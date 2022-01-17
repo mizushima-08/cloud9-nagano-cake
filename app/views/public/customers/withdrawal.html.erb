@@ -1,6 +1,20 @@
-<h2>本当に退会しますか？</h2>
-<p>退会すると、会員登録情報や</p>
-<p>これまでの購入履歴が閲覧できなくなります。</p>
-<p>退会する場合は「退会する」をクリックして下さい。</p>
-<div><%= link_to"退会しない", customer_path(current_customer) %></div>
-<div><p>ここで退会の処理</p></div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="mx-auto">
+      <h3 class="text-center"><strong>本当に退会しますか？</strong></h3>
+      <div class="row mt-4">
+        <div class="text-center">
+          <p>退会すると、会員登録情報や</br>
+          これまでの購入履歴が閲覧できなくなります。</br>
+          退会する場合は「退会する」をクリックして下さい。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-auto">
+      <%= link_to"退会しない", customer_path(current_customer), class:"btn btn-primary" %>
+      <%= link_to"退会する", withdrow_switch_customer_path(@customer), method: :patch, class:"btn btn-danger ml-3" %>
+    </div>
+  </div>
+</div>
