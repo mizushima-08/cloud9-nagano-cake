@@ -3,10 +3,11 @@ class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @customer = current_customer
+    @customer_address = Address.where(customer_id:[current_customer.id])
   end
 
   def confirm
-    @cart_items = CartItem.all
+    @cart_items = current_customer.cart_items.all
     @order = Order.new(order_params)
     @order.postage = 400
     session[:payment_method] = order_params[:payment_method]

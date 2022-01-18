@@ -21,9 +21,9 @@
                 <%= attachment_image_tag cart_item.item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '50x50' %>
                 <%= cart_item.item.name %>
               </td>
-              <td class="align-middle"><%= (cart_item.item.with_tax_price).floor %></td>
+              <td class="align-middle"><%= (cart_item.item.with_tax_price).floor.to_s(:delimited) %></td>
               <td class="align-middle"><%= cart_item.amount %></td>
-              <td class="align-middle"><%= (cart_item.subtotal).floor %></td>
+              <td class="align-middle"><%= (cart_item.subtotal).floor.to_s(:delimited) %></td>
             </tr>
             <% total += cart_item.subtotal %>
           <% end %>
@@ -40,12 +40,12 @@
             </tr>
             <tr>
               <td class="table-active">商品合計</td>
-              <td><%= total %></td>
+              <td><%= total.to_s(:delimited) %></td>
             </tr>
             <tr>
               <td class="table-active">請求金額</td>
               <% total_price = @order.postage + total %>
-              <td><%= total_price %></td>
+              <td><%= total_price.to_s(:delimited) %></td>
             </tr>
           </tbody>
         </table>

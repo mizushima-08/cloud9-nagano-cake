@@ -64,13 +64,13 @@
               <td><%= detail.price.to_s(:delimited) %></td>
               <td><%= detail.amount %></td>
               <td><%= (detail.amount * detail.price).to_s(:delimited) %></td>
-              <%= form_with(model: detail, url: admin_orders_item_status_path, method: :patch, local: true) do |f| %>
-                <td>
+              <td>
+                <%= form_with(model: detail, url: admin_orders_item_status_path, method: :patch, local: true) do |f| %>
                   <%= f.select :production_status, ProductOrder.production_statuses.keys.map {|k| [I18n.t("enums.product_order.production_status.#{k}"), k]} %>
                   <%= f.hidden_field :id, :value =>  detail.id %>
                   <%= f.submit "更新", class: "btn btn-success btn-sm ml-3 font-weight-bold" %>
-                </td>
-              <% end %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

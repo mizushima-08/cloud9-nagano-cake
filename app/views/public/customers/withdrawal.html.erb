@@ -14,7 +14,7 @@
   <div class="row">
     <div class="mx-auto">
       <%= link_to"退会しない", customer_path(current_customer), class:"btn btn-primary" %>
-      <%= link_to"退会する", withdrow_switch_customer_path(@customer), method: :patch, class:"btn btn-danger ml-3" %>
+      <%= link_to"退会する", withdrow_switch_customer_path(@customer), method: :patch, class:"btn btn-danger ml-3", data: { confirm: "退会されますか？"} %>
     </div>
   </div>
 </div>

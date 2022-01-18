@@ -4,7 +4,7 @@
       <%= render 'public/genre', genres: @genres %>
     </div>
     <div class="col-sm-3">
-      <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", fallback: 'noimage.jpg', size: '200x200' %>
+      <%= attachment_image_tag @item, :image, :fill, 200, 200, format: "jpeg", size: '200x200' %>
     </div>
     <div class="col-sm-7">
       <table class="table table-borderless">

@@ -2,26 +2,27 @@
   <div class="row">
     <h4>新規会員登録</h4>
   </div>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="row mt-4">
-      <div class="col-sm-10">
+  <%= render "admin/shared/error_messages", resource: resource %>
+
+  <div class="row mt-4">
+    <div class="col-sm-10">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="form-group row">
           <div class="col-sm-3">
             <%= f.label :name, "名前"%>
-            <%= f.label :last_name, "(姓)", class: "float-right"; %>
+            <span class="float-right">(姓) </span>
           </div>
           <%= f.text_field :last_name, autofocus: true, placeholder:"令和", class: "col-sm-3"  %>
-          <%= f.label :first_name, "(名)", class: "col-sm-1 text-right"; %>
+          <span class = "col-sm-1 text-right">(名)</span>
           <%= f.text_field :first_name, autofocus: true, placeholder:"道子", class: "col-sm-3"  %>
         </div>
         <div class="form-group row">
           <div class="col-sm-3">
             <%= f.label :name, "フリガナ"%>
-            <%= f.label :last_name_kana, "(セイ)", class: "float-right"; %>
+            <span class="float-right">(セイ) </span>
           </div>
           <%= f.text_field :last_name_kana, autofocus: true, placeholder:"レイワ", class: "col-sm-3"  %>
-          <%= f.label :first_name_kana, "(メイ)", class: "col-sm-1 text-right"; %>
+          <span class = "col-sm-1 text-right">(メイ)</span>
           <%= f.text_field :first_name_kana, autofocus: true, placeholder:"ミチコ", class: "col-sm-3"  %>
         </div>
         <div class="form-group row">
@@ -38,7 +39,7 @@
         </div>
         <div class="form-group row">
           <%= f.label :telephone_numder, "電話番号(ハイフンなし)", class: "col-sm-3" %>
-          <%= f.text_field :telephone_number, autofocus: true,  placeholder:"00000000000" %>
+          <%= f.phone_field :telephone_number, autofocus: true,  placeholder:"00000000000" %>
         </div>
         <div class="form-group row">
           <%= f.label :password, "パスワード(6文字以上)", class: "col-sm-3" %>
@@ -54,8 +55,8 @@
         <div class="actions">
           <%= f.submit "新規登録", class: "btn btn-success col-sm-2 font-weight-bold offset-sm-3" %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
   <div class="row mt-4">
     <h4>既に登録済みの方</h4>
